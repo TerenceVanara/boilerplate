@@ -1,14 +1,11 @@
 {
-  "name": "@finsweet/developer-starter",
+  "name": "@vanara/test",
   "version": "1.0.0",
-  "description": "Developer starter template for Finsweet projects.",
+  "description": "Developer starter template from Finsweet projects.",
   "homepage": "https://github.com/finsweet/developer-starter#readme",
   "license": "ISC",
   "keywords": [],
-  "author": {
-    "name": "Finsweet",
-    "url": "https://www.finsweet.com/"
-  },
+  "author": "Finsweet (https://www.finsweet.com/)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/finsweet/developer-starter.git"
@@ -52,5 +49,11 @@
   },
   "dependencies": {
     "@finsweet/ts-utils": "^0.33.1"
+  },
+  "bin": {
+    "test": "bin/build.js"
+  },
+  "directories": {
+    "test": "tests"
   }
 }
