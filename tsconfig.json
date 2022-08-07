@@ -1,10 +1,14 @@
 {
+  "strictPropertyInitialization": false,
   "extends": "@finsweet/tsconfig",
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": "./",
     "paths": {
-      "$utils/*": ["src/utils/*"]
+      "$utils/*": ["src/utils/*"],
+      "$pages/*": ["src/pages/*"],
+      "$classes/*": ["src/classes/*"]
     }
   }
+  
 }

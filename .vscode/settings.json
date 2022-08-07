@@ -1,0 +1,5 @@
+{
+    "prettier.configPath": ".prettierrc.cjs",
+    "prettier.semi": false,
+    "prettier.tabWidth": 4
+}

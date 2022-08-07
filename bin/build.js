@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
-import esbuild from 'esbuild';
+import esbuild from 'esbuild'
 
-const buildDirectory = 'dist';
-const production = process.env.NODE_ENV === 'production';
+const buildDirectory = 'dist'
+const production = process.env.NODE_ENV === 'production'
 
 // Config entrypoint files
-const entryPoints = ['src/index.ts'];
+const entryPoints = ['src/index.ts']
 
 /**
  * Default Settings
@@ -18,11 +18,11 @@ const defaultSettings = {
   sourcemap: !production,
   target: production ? 'es2017' : 'esnext',
   entryPoints,
-};
+}
 
 // Files building
 if (production) {
-  esbuild.build(defaultSettings);
+  esbuild.build(defaultSettings)
 }
 
 // Files serving
@@ -36,6 +36,6 @@ else {
       defaultSettings
     )
     .then((server) => {
-      console.log(`Serving at http://localhost:${server.port}`);
-    });
+      console.log(`Serving at http://localhost:${server.port}`)
+    })
 }

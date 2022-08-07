@@ -37,6 +37,7 @@
     "@finsweet/tsconfig": "^1.1.0",
     "@playwright/test": "^1.22.2",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@types/lodash": "^4.14.182",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
     "cross-env": "^7.0.3",
@@ -48,7 +49,9 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
-    "@finsweet/ts-utils": "^0.33.1"
+    "@finsweet/ts-utils": "^0.33.1",
+    "gsap": "^3.10.4",
+    "lodash": "^4.17.21"
   },
   "bin": {
     "test": "bin/build.js"

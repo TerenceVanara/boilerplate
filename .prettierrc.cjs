@@ -3,7 +3,7 @@ module.exports = {
   arrowParens: 'always',
   printWidth: 100,
   tabWidth: 2,
-  semi: true,
+  semi: false,
   singleQuote: true,
   plugins: [require.resolve('@trivago/prettier-plugin-sort-imports')],
   importOrder: ['<THIRD_PARTY_MODULES>', '^[$]', '^[./]'],

@@ -8,6 +8,7 @@ specifiers:
   '@finsweet/tsconfig': ^1.1.0
   '@playwright/test': ^1.22.2
   '@trivago/prettier-plugin-sort-imports': ^3.2.0
+  '@types/lodash': ^4.14.182
   '@typescript-eslint/eslint-plugin': ^5.27.1
   '@typescript-eslint/parser': ^5.27.1
   cross-env: ^7.0.3
@@ -15,11 +16,15 @@ specifiers:
   eslint: ^8.17.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.0.0
+  gsap: ^3.10.4
+  lodash: ^4.17.21
   prettier: ^2.6.2
   typescript: ^4.7.3
 
 dependencies:
   '@finsweet/ts-utils': 0.33.1
+  gsap: 3.10.4
+  lodash: 4.17.21
 
 devDependencies:
   '@changesets/changelog-git': 0.1.11
@@ -28,6 +33,7 @@ devDependencies:
   '@finsweet/tsconfig': 1.1.0
   '@playwright/test': 1.22.2
   '@trivago/prettier-plugin-sort-imports': 3.2.0_prettier@2.6.2
+  '@types/lodash': 4.14.182
   '@typescript-eslint/eslint-plugin': 5.27.1_aq7uryhocdbvbqum33pitcm3y4
   '@typescript-eslint/parser': 5.27.1_ud6rd4xtew5bv4yhvkvu24pzm4
   cross-env: 7.0.3
@@ -622,6 +628,10 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/lodash/4.14.182:
+    resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
     dev: true
 
   /@types/minimist/1.2.2:
@@ -1667,6 +1677,10 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
 
+  /gsap/3.10.4:
+    resolution: {integrity: sha512-6QatdkKxXCMfvCW4rM++0RqyLQAzFX5nwl3yHS0XPgkZBkiSEY3VZVbMltrdtsbER/xZonLtyHt684wRp4erlQ==}
+    dev: false
+
   /hard-rejection/2.1.0:
     resolution: {integrity: sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==}
     engines: {node: '>=6'}
@@ -1902,7 +1916,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /lru-cache/4.1.5:
     resolution: {integrity: sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==}
