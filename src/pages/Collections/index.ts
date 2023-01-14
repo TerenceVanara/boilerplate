@@ -4,7 +4,7 @@ export default class Collections extends Page {
   constructor() {
     super({
       id: 'collections',
-      element: '.collections',
+      parentElement: '.collections',
       elements: {},
     })
   }

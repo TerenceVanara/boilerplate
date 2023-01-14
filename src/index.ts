@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import each from 'lodash/each'
 
+import Preloader from '$component/Preloader'
 import About from '$pages/About'
 import Collections from '$pages/Collections'
 import Detail from '$pages/Detail'
@@ -18,10 +19,16 @@ class App {
   template!: string | null
   pages!: { [key: string]: object }
   page!: { [key: string]: any }
+  preloader!: Preloader
   constructor() {
+    this.createPreloader()
     this.createContent()
     this.createPage()
     this.addLinkListener()
+  }
+
+  createPreloader() {
+    this.preloader = new Preloader()
   }
 
   createContent() {
@@ -46,7 +53,6 @@ class App {
     if (this.page != null) {
       this.page.create()
       this.page.show()
-      // this.page.hide()
     }
   }
 
@@ -63,21 +69,22 @@ class App {
 
       const divContent = div.querySelector('.page-wrapper')
 
-      if (divContent != null) {
+      if (divContent !== null) {
         this.template = divContent.getAttribute('data-template')
       }
 
-      if (this.content != null && divContent != null) {
+      if (this.content !== null && divContent !== null && this.template !== null) {
         this.content.setAttribute('data-template', this.template)
         this.content.innerHTML = divContent.innerHTML
       }
 
-      if (this.template != null) {
+      if (this.template !== null) {
         this.page = this.pages[this.template]
       }
-      if (this.page != null) {
+      if (this.page !== null) {
         this.page.create()
         this.page.show()
+        this.addLinkListener()
       }
     } else {
       console.log('Error')

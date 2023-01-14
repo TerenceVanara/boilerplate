@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-/* eslint-disable no-console */
 import GSAP from 'gsap'
 import each from 'lodash/each'
+import type { Elements } from 'src/types'
 
 export default class Page {
-  selector: string
-  selectorChildren: { [key: string]: any }
-  id: string
-  element!: HTMLElement | null
-  elements!: { [key: string]: any }
-  constructor({ id, element, elements }: { id: string; element: string; elements: object }) {
-    this.selector = element
+  selector
+  selectorChildren
+  id
+  parentElement: unknown
+  elements: { [key: string]: unknown } = {}
+
+  constructor({ id, parentElement, elements }: Elements) {
+    this.selector = parentElement
     this.selectorChildren = {
       ...elements,
     }
@@ -20,7 +19,7 @@ export default class Page {
 
   create() {
     if (this.selector != null) {
-      this.element = document.querySelector(this.selector)
+      this.parentElement = document.querySelector(this.selector)
     }
     this.elements = {}
     each(this.selectorChildren, (entry, key) => {
@@ -31,22 +30,18 @@ export default class Page {
       ) {
         this.elements[key] = entry
       } else {
-        this.elements[key] = document.querySelectorAll(entry)
-
-        if (this.elements[key].length === 0) {
-          this.elements[key] = null
-        } else if (this.elements[key].length === 1) {
-          this.elements[key] = document.querySelector(entry)
-        }
+        if (!document.querySelector(entry as string)) this.elements[key] = null
+        this.elements[key] = document.querySelector(entry as string)
       }
     })
-    console.log('Create', this.id, this.element)
-    console.log(this.elements)
+    // console.log('Create', this.id, this.element)
+    // console.log(this.elements)
   }
 
   show() {
+    if (!this.parentElement) return
     return new Promise((resolve) => {
-      GSAP.from(this.element, {
+      GSAP.from(this.parentElement as HTMLElement, {
         autoAlpha: 0,
         onComplete: resolve,
       })
@@ -54,8 +49,9 @@ export default class Page {
   }
 
   hide() {
+    if (!this.parentElement) return
     return new Promise((resolve) => {
-      GSAP.to(this.element, {
+      GSAP.to(this.parentElement as HTMLElement, {
         autoAlpha: 0,
         onComplete: resolve,
       })
