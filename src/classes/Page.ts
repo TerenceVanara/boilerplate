@@ -6,11 +6,11 @@ export default class Page {
   selector
   selectorChildren
   id
-  parentElement: unknown
+  parentElement: HTMLElement | null = null
   elements: { [key: string]: unknown } = {}
 
-  constructor({ id, parentElement, elements }: Elements) {
-    this.selector = parentElement
+  constructor({ id, element, elements }: Elements) {
+    this.selector = element
     this.selectorChildren = {
       ...elements,
     }
@@ -18,10 +18,9 @@ export default class Page {
   }
 
   create() {
-    if (this.selector != null) {
-      this.parentElement = document.querySelector(this.selector)
+    if (this.selector !== null) {
+      this.parentElement = document.querySelector<HTMLElement>(this.selector)
     }
-    this.elements = {}
     each(this.selectorChildren, (entry, key) => {
       if (
         entry instanceof HTMLElement ||
@@ -41,7 +40,7 @@ export default class Page {
   show() {
     if (!this.parentElement) return
     return new Promise((resolve) => {
-      GSAP.from(this.parentElement as HTMLElement, {
+      GSAP.from(this.parentElement, {
         autoAlpha: 0,
         onComplete: resolve,
       })

@@ -4,7 +4,7 @@ export default class About extends Page {
   constructor() {
     super({
       id: 'about',
-      parentElement: '.home',
+      element: '.home',
       elements: {},
     })
   }

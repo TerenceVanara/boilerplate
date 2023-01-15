@@ -1,5 +1,5 @@
 export interface Elements {
   id?: string
-  parentElement: string
+  element: string
   elements: { [key: string]: string | HTMLElement | NodeList | null }
 }

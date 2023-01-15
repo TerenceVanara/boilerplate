@@ -4,7 +4,7 @@ export default class Detail extends Page {
   constructor() {
     super({
       id: 'detail',
-      parentElement: '.collections',
+      element: '.collections',
       elements: {},
     })
   }

@@ -4,11 +4,11 @@ import type { Elements } from 'src/types'
 export default class Component {
   selector
   selectorChildren
-  parentElement: unknown
+  parentElement: HTMLElement | null = null
   elements: { [key: string]: unknown } = {}
 
-  constructor({ parentElement, elements }: Elements) {
-    this.selector = parentElement
+  constructor({ element, elements }: Elements) {
+    this.selector = element
     this.selectorChildren = {
       ...elements,
     }
