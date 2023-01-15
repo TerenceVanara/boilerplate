@@ -1,13 +1,13 @@
 import GSAP from 'gsap'
 import each from 'lodash/each'
-import type { Elements } from 'src/types'
+import type { Elements, PageInterface } from 'src/types'
 
-export default class Page {
+export default class Page implements PageInterface {
   selector
   selectorChildren
   id
-  parentElement: HTMLElement | null = null
-  elements: { [key: string]: unknown } = {}
+  parentElement!: HTMLElement | null
+  elements: { [key: string]: string | HTMLElement | NodeList | null } = {}
 
   constructor({ id, element, elements }: Elements) {
     this.selector = element
@@ -18,9 +18,9 @@ export default class Page {
   }
 
   create() {
-    if (this.selector !== null) {
-      this.parentElement = document.querySelector<HTMLElement>(this.selector)
-    }
+    if (!this.selector) return
+    this.parentElement = document.querySelector<HTMLElement>(this.selector)
+
     each(this.selectorChildren, (entry, key) => {
       if (
         entry instanceof HTMLElement ||
@@ -30,7 +30,7 @@ export default class Page {
         this.elements[key] = entry
       } else {
         if (!document.querySelector(entry as string)) this.elements[key] = null
-        this.elements[key] = document.querySelector(entry as string)
+        this.elements[key] = document.querySelector<HTMLElement>(entry as string)
       }
     })
     // console.log('Create', this.id, this.element)

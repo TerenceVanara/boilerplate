@@ -1,24 +1,23 @@
 /* eslint-disable no-console */
 import each from 'lodash/each'
 
+import type Page from '$classes/Page'
 import Preloader from '$component/Preloader'
 import About from '$pages/About'
 import Collections from '$pages/Collections'
 import Detail from '$pages/Detail'
 import Home from '$pages/Home'
-import { greetUser } from '$utils/greet'
 
 window.Webflow ||= []
 window.Webflow.push(() => {
-  const name = 'John Doe'
-  greetUser(name)
+  new App()
 })
 
 class App {
   content!: HTMLElement | null
   template!: string | null
-  pages!: { [key: string]: object }
-  page!: { [key: string]: any }
+  pages!: { [key: string]: Page }
+  page!: Page
   preloader!: Preloader
   constructor() {
     this.createPreloader()
@@ -33,9 +32,8 @@ class App {
 
   createContent() {
     this.content = document.querySelector('.page-wrapper')
-    if (this.content != null) {
-      this.template = this.content.getAttribute('data-template')
-    }
+    if (!this.content) return
+    this.template = this.content.getAttribute('data-template')
     console.log(this.template)
   }
 
@@ -47,56 +45,50 @@ class App {
       home: new Home(),
     }
 
-    if (this.template != null) {
-      this.page = this.pages[this.template]
-    }
-    if (this.page != null) {
-      this.page.create()
-      this.page.show()
-    }
+    if (!this.template) return
+    this.page = this.pages[this.template]
+
+    if (!this.page) return
+    this.page.create()
+    this.page.show()
   }
 
-  async onchange(url: any) {
-    const request = await window.fetch(url)
+  async onchange(url: string) {
+    try {
+      const request = await window.fetch(url)
+      await this.page.hide()
 
-    await this.page.hide()
+      if (request.status !== 200) throw new Error(`${request} ${request.status}`)
 
-    if (request.status === 200) {
       const html = await request.text()
       const div = document.createElement('div')
-
       div.innerHTML = html
 
       const divContent = div.querySelector('.page-wrapper')
 
-      if (divContent !== null) {
-        this.template = divContent.getAttribute('data-template')
-      }
+      if (!divContent) return
+      this.template = divContent.getAttribute('data-template')
 
-      if (this.content !== null && divContent !== null && this.template !== null) {
-        this.content.setAttribute('data-template', this.template)
-        this.content.innerHTML = divContent.innerHTML
-      }
+      if (!this.content || !divContent || !this.template) return
+      this.content.setAttribute('data-template', this.template)
+      this.content.innerHTML = divContent.innerHTML
+      this.page = this.pages[this.template]
 
-      if (this.template !== null) {
-        this.page = this.pages[this.template]
-      }
-      if (this.page !== null) {
-        this.page.create()
-        this.page.show()
-        this.addLinkListener()
-      }
-    } else {
-      console.log('Error')
+      if (!this.page) return
+      this.page.create()
+      this.page.show()
+      this.addLinkListener()
+
+      console.log(request)
+    } catch (err) {
+      console.error(`${err} 💥💥💥`)
     }
-
-    console.log(request)
   }
 
   addLinkListener() {
-    const links: object = document.querySelectorAll('a')
-    each(links, (link: any) => {
-      link.onclick = (event: { preventDefault: () => void }) => {
+    const links = document.querySelectorAll('a')
+    each(links, (link) => {
+      link.onclick = (event) => {
         event.preventDefault()
 
         const { href } = link
@@ -106,5 +98,3 @@ class App {
     })
   }
 }
-
-new App()

@@ -9,7 +9,6 @@ export default class Preloader extends Component {
         number: '.loading_text',
       },
     })
-
     // console.log(this.parentElement, this.elements)
   }
 }

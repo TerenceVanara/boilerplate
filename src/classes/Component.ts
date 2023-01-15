@@ -4,8 +4,8 @@ import type { Elements } from 'src/types'
 export default class Component {
   selector
   selectorChildren
-  parentElement: HTMLElement | null = null
-  elements: { [key: string]: unknown } = {}
+  parentElement!: HTMLElement | null
+  elements: { [key: string]: string | HTMLElement | NodeList | null } = {}
 
   constructor({ element, elements }: Elements) {
     this.selector = element
@@ -28,7 +28,7 @@ export default class Component {
         this.elements[key] = entry
       } else {
         if (!document.querySelector(entry as string)) this.elements[key] = null
-        this.elements[key] = document.querySelector(entry as string)
+        this.elements[key] = document.querySelector<HTMLElement>(entry as string)
       }
     })
   }
